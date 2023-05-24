@@ -1,6 +1,7 @@
-package utils;
+package com.bestapp.hIbernate_introduction.utils;
 
-import model.Employee;
+import com.bestapp.hIbernate_introduction.model.City;
+import com.bestapp.hIbernate_introduction.model.Employee;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -15,6 +16,7 @@ public class HibernateSessionFactoryUtil {
             try {
                 Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
                 configuration.addAnnotatedClass(Employee.class);
+                configuration.addAnnotatedClass(City.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());
             } catch (Exception e) {

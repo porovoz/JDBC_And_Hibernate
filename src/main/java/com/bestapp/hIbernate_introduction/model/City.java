@@ -1,21 +1,35 @@
-package model;
+package com.bestapp.hIbernate_introduction.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "city")
 public class City {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "city_id")
+    private Integer id;
+    @Column(name = "city_name")
     private String name;
 
-    public City(int id, String name) {
+    public City() {
+    }
+
+    public City(String name) {
+        this.name = name;
+    }
+
+    public City(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -32,7 +46,7 @@ public class City {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         City city = (City) o;
-        return id == city.id && Objects.equals(name, city.name);
+        return Objects.equals(id, city.id) && Objects.equals(name, city.name);
     }
 
     @Override
