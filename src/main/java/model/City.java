@@ -1,10 +1,27 @@
 package model;
 
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "city")
 public class City {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "city_id")
     private int id;
+    @Column(name = "city_name", nullable = false)
     private String name;
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    private List<Employee> employeeList;
+
+    public City() {
+    }
+
+    public City(String name) {
+        this.name = name;
+    }
 
     public City(int id, String name) {
         this.id = id;
