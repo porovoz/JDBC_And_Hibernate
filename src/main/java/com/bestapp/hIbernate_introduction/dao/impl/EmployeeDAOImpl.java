@@ -24,12 +24,16 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public Employee readById(Integer id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Employee.class, id);
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
+            return session.get(Employee.class, id);
+        }
     }
 
     @Override
     public List<Employee> readAll() {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Employee").list();
+        try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
+            return session.createQuery("From Employee").list();
+        }
     }
 
     @Override
